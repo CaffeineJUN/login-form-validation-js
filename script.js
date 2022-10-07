@@ -8,9 +8,8 @@ const pInput = pFidle.querySelector('input')
 form.onsubmit = e => {
     e.preventDefault()
 
-    if (eInput.value == '') {
-        eFidle.classList.add('shake', 'error')
-    }
+    if (eInput.value == '') eFidle.classList.add('shake', 'error')
+    else checkEmail()
 
     if (pInput.value == '') {
         pFidle.classList.add('shake', 'error')
@@ -22,7 +21,10 @@ form.onsubmit = e => {
     }, 500)
 
     eInput.onkeyup = () => {
-        // validate email pattern
+        checkEmail()
+    }
+
+    function checkEmail() {
         let pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/
         if (!eInput.value.match(pattern)) {
             eFidle.classList.add('error')
@@ -40,5 +42,10 @@ form.onsubmit = e => {
         } else {
             pFidle.classList.remove('error')
         }
+    }
+
+    if (!eFidle.classList.contains('error') && !pFidle.classList.contains('error')) {
+        window.location.href = '#'
+        console.log('form submited')
     }
 }
